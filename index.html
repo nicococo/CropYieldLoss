@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>An anomaly detection challenge for data with complex dependency structure by nicococo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>An anomaly detection challenge for data with complex dependency structure</h1>
+        <p>Identifying years of heavy crop yield loss in India</p>
+
+        <p class="view"><a href="https://github.com/nicococo/CropYieldLoss">View the Project on GitHub <small>nicococo/CropYieldLoss</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/nicococo/CropYieldLoss/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nicococo/CropYieldLoss/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nicococo/CropYieldLoss">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About</h3>
+
+<p>An anomaly detection challenge for data with complex dependency structure.</p>
+
+<p>Accompanying software package.  </p>
+
+<h3>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Description</h3>
+
+<p>Albeit tons of real-world datasets and challenges for regression and classification exists, only few are available for the task of anomaly detection. Those few, however, are primarily focused on large-scale, covariate shift, or concept drift performance. </p>
+
+<p>In contrast, we propose an anomaly detection challenge for data with complex dependency structure. For that, we provide a benchmark dataset for detection of years of heavy crop yield loss in India, based upon freely available statistics. Here, anomaly detection methods are forced to leverage the inter-dependency structure of measurements. </p>
+
+<p>We describe each step of the <em>non-trivial</em> dataset construction process in detail and further, propose an anomaly detection challenge.
+In a series of experiments we examine the dataset and provide some baseline benchmarks based on a variety of supervised, semi-supervised, and unsupervised machine learning methods. We invite researchers to participate and share their results.</p>
+
+<h3>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data</h3>
+
+<p>Data can be aquired at http://...
+and should contain the following: </p>
+
+<ul>
+<li>WDATA (548, 11284, 6)
+['Max Temperature' 'Min Temperature' 'Precipitation' 'Wind' 'Relative Humidity' 'Solar']</li>
+<li>DATES (11284, 3)
+['Day' 'Month' 'Year']</li>
+<li>STATIONS (548, 4)
+['Id' 'Longitude' 'Latitude' 'Elevation']</li>
+<li>DISTS (93, 5)
+['DistCode' 'DistName' 'StateCode' 'StateName' 'StationIds']</li>
+<li>LABEL (93, 31)
+[1979 - 2009]</li>
+</ul>
+
+<h3>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results</h3>
+
+<p>too appear...</p>
+
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+
+<p>When using the data or results in your research project, please cite <em>too appear</em></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/nicococo">nicococo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
