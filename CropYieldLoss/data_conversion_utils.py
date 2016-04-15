@@ -78,7 +78,7 @@ def generate_full_dataset(path):
         print cnt
         cnt -= 1
     print 'Saving intermediate full data set...'
-    np.savez_compressed('{0}data.npz'.format(path),
+    np.savez_compressed('{0}data.npz'.format(path), version='1.0',
                         wdata=wdata, dists=dists, yield_col_names=yield_col_names, wdata_col_name=wdata_col_name)
 
 
@@ -100,13 +100,16 @@ def calc_anom_threshold(se):
     return cutoff, dse
 
 
-def generate_anomalies(path, plot=True):
+def generate_anomalies(path, plot=False):
+    print('Generating Anomalies...')
+    print('Loading intermediate data file.')
     data = np.load('{0}data.npz'.format(path))
     dists = data['dists']
     yield_col_names = data['yield_col_names']
-    print len(dists)
-    print yield_col_names
-    print yield_col_names[[0, 1, 12, 13]]
+
+    print 'Number of districts: ', len(dists)
+    print 'Yield column names: ', yield_col_names
+    print 'Selected columns:', yield_col_names[[0, 1, 12, 13]]
 
     # weather data goes from 1979 - 2014
     # yield data starts from 1966 - 2009 (confirmed for all districts)
@@ -141,7 +144,7 @@ def generate_anomalies(path, plot=True):
         inds = np.argsort(se)
         cutoff, dse = calc_anom_threshold(se[inds])
 
-        ainds = np.where((se_bak >= cutoff) & (flag_anom is True))[0]
+        ainds = np.where((se_bak >= cutoff) & flag_anom)[0]
         lbl = np.zeros(se_bak.size)
         lbl[ainds] = 1.0
         lbl_dists.append(lbl)
@@ -182,6 +185,8 @@ def generate_anomalies(path, plot=True):
 
 
 def cut_weather_data(path):
+    print('Thinning weather data...')
+    print('Loading intermediate data file.')
     data = np.load('{0}data.npz'.format(path))
     dists = data['dists']
     wdata = data['wdata']
@@ -229,8 +234,8 @@ def cut_weather_data(path):
         flag = 1
 
     dates = np.array(dates, dtype='i')
-    print dates.shape
-    print lens
+    print 'Dimensionality of dates: ', dates.shape
+    print len(lens)
     print 'Total number of weather measurement: {0}'.format(cnt)
     print 'Total number of skipped weather measurement: {0}'.format(cnt_skip)
 
@@ -251,6 +256,7 @@ def cut_dists_data(path):
 
 
 def generate_processed_dataset(path):
+    print('Process intermediate data...')
     # generate anomalies from yield data
     (lbl, years) = generate_anomalies(path, plot=False)
 
@@ -264,7 +270,10 @@ def generate_processed_dataset(path):
 
     # cut years
     years = years[13:]
-    print len(lbl[0])
+    print 'Years: ', years
+    print 'Number of years: ', years.size
+    print 'Check against label: ', len(lbl[0])
+    assert years.size == len(lbl[0])
 
     # convert to array
     lbl = np.array(lbl)
@@ -276,7 +285,8 @@ def generate_processed_dataset(path):
     (dists, dists_cnames) = cut_dists_data(path)
 
     print('Saving...')
-    np.savez_compressed('{0}processed_data.npz'.format(path),
+    # np.savez_compressed just takes too long to load
+    np.savez('{0}cylad1.npz'.format(path), version='1.0',
                         wdata=data, wdata_cols=data_cnames,
                         dates=dates, dates_cols=dates_cnames,
                         stations=stations, stations_cols=stations_cnames,
